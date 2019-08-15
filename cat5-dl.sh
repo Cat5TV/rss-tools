@@ -16,6 +16,15 @@
 
 # End of user configuration
 
+if [[ -e $HOME/.cat5-dl.pid ]]; then
+  pid=$(cat $HOME/.cat5-dl.pid)
+  if ps -p $pid > /dev/null
+  then
+    echo "Already Running."
+    exit
+  fi
+fi
+echo $$ > $HOME/.cat5-dl.pid
 
 curl=$(which curl)
 if [[ $curl == '' ]]; then
